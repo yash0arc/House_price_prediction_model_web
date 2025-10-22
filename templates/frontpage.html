@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>House Predictor AI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 via-gray-50 to-white text-gray-800 min-h-screen">
+
+  <!-- Navbar -->
+  <nav class="bg-white shadow-md fixed w-full z-20 top-0 left-0 border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="/" class="text-2xl font-bold text-blue-700">🏠 House Predictor AI</a>
+      <div class="hidden md:flex space-x-8">
+        <a href="/" class="text-gray-700 hover:text-blue-700 font-semibold">Home</a>
+        <a href="#about" class="text-gray-700 hover:text-blue-700 font-semibold">About</a>
+        <a href="/predict" class="text-gray-700 hover:text-blue-700 font-semibold">Predict</a>
+      </div>
+      <a href="/predict" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-semibold">Predict Now</a>
+    </div>
+    
+
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="flex flex-col items-center justify-center text-center h-screen px-4 pt-20">
+    <h1 class="text-5xl font-extrabold mb-4 text-blue-700">Accurate House Price Prediction 🏡</h1>
+    <p class="text-lg text-gray-600 mb-8 max-w-3xl">
+      Predict house prices using a machine learning model trained on real-world housing data. Input key features like location, area type, square footage, bedrooms, and bathrooms to get a reliable estimate.
+    </p>
+    <a href="/predict" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full font-semibold transition">
+      Go to Prediction Page
+    </a>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <h2 class="text-4xl font-bold text-blue-700 mb-12">About the Project</h2>
+      <p class="text-gray-600 mb-12 max-w-3xl mx-auto">
+        This project predicts house prices based on key features like location, square footage, number of bedrooms and bathrooms, and area type. It uses a Ridge Regression model trained on cleaned and preprocessed housing data.
+      </p>
+
+      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+
+        <!-- Card 1: Project Structure -->
+        <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition overflow-hidden">
+          <div class="h-40 bg-blue-200 flex items-center justify-center">
+            <span class="text-6xl">📂</span>
+          </div>
+          <div class="p-6 text-left">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">Project Structure</h3>
+            <p class="text-gray-600 text-sm mb-1"><code>Bengaluru_House_Data.csv</code> – Dataset used.</p>
+            <p class="text-gray-600 text-sm mb-1"><code>main.ipynb / main.py</code> – Scripts for preprocessing, training, evaluation.</p>
+            <p class="text-gray-600 text-sm mb-1"><code>model.pkl</code> – Saved Ridge Regression model.</p>
+            <p class="text-gray-600 text-sm"><code>README.md</code> – Project documentation.</p>
+          </div>
+        </div>
+
+        <!-- Card 2: Features Used -->
+        <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition overflow-hidden">
+          <div class="h-40 bg-green-200 flex items-center justify-center">
+            <span class="text-6xl">🧩</span>
+          </div>
+          <div class="p-6 text-left">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">Features Used</h3>
+            <p class="text-gray-600 text-sm mb-1">Location (One-hot encoded)</p>
+            <p class="text-gray-600 text-sm mb-1">Area Type (One-hot encoded)</p>
+            <p class="text-gray-600 text-sm mb-1">Size (Bedrooms)</p>
+            <p class="text-gray-600 text-sm mb-1">Total Square Footage</p>
+            <p class="text-gray-600 text-sm">Bathrooms</p>
+          </div>
+        </div>
+
+        <!-- Card 3: Data Preprocessing -->
+        <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition overflow-hidden">
+          <div class="h-40 bg-yellow-200 flex items-center justify-center">
+            <span class="text-6xl">🧹</span>
+          </div>
+          <div class="p-6 text-left">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">Data Preprocessing</h3>
+            <p class="text-gray-600 text-sm mb-1">Handled missing values and converted “2 BHK” to numeric.</p>
+            <p class="text-gray-600 text-sm mb-1">Cleaned <code>total_sqft</code> values and standardized data.</p>
+            <p class="text-gray-600 text-sm mb-1">Grouped sparse locations under “other”.</p>
+            <p class="text-gray-600 text-sm">Removed outliers using bath ratio, sqft/room, IQR filtering.</p>
+          </div>
+        </div>
+
+        <!-- Card 4: Models Used -->
+        <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition overflow-hidden">
+          <div class="h-40 bg-red-200 flex items-center justify-center">
+            <span class="text-6xl">🤖</span>
+          </div>
+          <div class="p-6 text-left">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">Models Used</h3>
+            <p class="text-gray-600 text-sm mb-1">Linear Regression</p>
+            <p class="text-gray-600 text-sm mb-1">Ridge Regression</p>
+            <p class="text-gray-600 text-sm mb-1">Lasso Regression</p>
+            <p class="text-gray-600 text-sm mt-2"><strong>Ridge Regression (α = 1)</strong> selected for best performance.</p>
+          </div>
+        </div>
+
+        <!-- Card 5: Outlier Handling -->
+        <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition overflow-hidden">
+          <div class="h-40 bg-purple-200 flex items-center justify-center">
+            <span class="text-6xl">📊</span>
+          </div>
+          <div class="p-6 text-left">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">Outlier Handling</h3>
+            <p class="text-gray-600 text-sm mb-1">Removed unrealistic data using statistical techniques:</p>
+            <p class="text-gray-600 text-sm mb-1">• Bathroom-to-bedroom ratio</p>
+            <p class="text-gray-600 text-sm mb-1">• Square feet per room</p>
+            <p class="text-gray-600 text-sm">• IQR-based filtering for size, bath, and price</p>
+          </div>
+        </div>
+
+        <!-- Card 6: Model Selection -->
+        <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition overflow-hidden">
+          <div class="h-40 bg-indigo-200 flex items-center justify-center">
+            <span class="text-6xl">🧠</span>
+          </div>
+          <div class="p-6 text-left">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">Model Selection</h3>
+            <p class="text-gray-600 text-sm mb-1">After cross-validation and hyperparameter tuning, Ridge Regression was finalized.</p>
+            <p class="text-gray-400 mt-2 text-sm">Performance optimized with alpha = 1.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-6 bg-white border-t border-gray-200 text-gray-500 text-sm">
+    © House Predictor AI | Built with ❤️ using FastAPI & TailwindCSS
+  </footer>
+</body>
+</html>

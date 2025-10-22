@@ -1,0 +1,58 @@
+Bengaluru House Price Prediction
+
+This is a machine learning project that predicts the prices of houses in Bengaluru based on features like location, square footage, number of bedrooms, bathrooms, and area type. The model is built using linear regression techniques after cleaning and preprocessing the data from the Kaggle Bengaluru House Price dataset.
+
+
+
+
+
+Project Structure
+
+-Bengaluru_House_Data.csv: Dataset used for training and testing
+-main.ipynb / main.py: Script with complete preprocessing, model training, evaluation, and prediction logic
+-model.pkl : Trained Ridge Regression model (can be saved for deployment)
+-README.md: Project documentation
+
+
+
+
+
+
+Features Used:
+
+-Location (One-hot encoded)
+-Area Type (One-hot encoded)
+-Size (Number of bedrooms)
+-Total Square Footage
+-Bathrooms
+
+
+
+
+
+
+Data Preprocessing Highlights:
+
+-Handling missing values
+-Converting size from string format ("2 BHK") to integer
+-Cleaning and standardizing total_sqft values
+-Reducing sparse locations by grouping low-frequency ones into "other"
+
+
+
+Removing outliers based on:
+
+-Bathroom to bedroom ratio
+-Square feet per room
+-IQR-based filtering for size, bath, and price
+
+
+
+
+Models used with cross-validation:
+
+-LinearRegression
+-Ridge
+-Lasso
+
+After tuning, Ridge Regression with alpha=1 was selected for the best performance.
