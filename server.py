@@ -5,6 +5,8 @@ from pydantic import BaseModel
 import numpy as np
 import pandas as pd
 import joblib
+import os
+import uvicorn
 
 app = FastAPI()
 
@@ -59,3 +61,8 @@ async def get_prediction(data: HouseInput):
         data.location, data.total_sqft, data.area_type, data.bhk, data.bath
     )
     return JSONResponse(content={"prediction": round(predicted_price, 2)})
+
+# Run using Railway's PORT
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8080))
+    uvicorn.run("server:app", host="0.0.0.0", port=port, reload=True)
