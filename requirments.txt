@@ -1,2 +1,7 @@
-flask
+fastapi
+uvicorn
+pandas
+numpy
+scikit-learn
+joblib
 jinja2

@@ -341,35 +341,42 @@ const resultDiv = document.getElementById("result");
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
+  // Collect input values
   const data = {
-    location: document.getElementById("location").value,
-    area_type: document.getElementById("area_type").value,
-    total_sqft: Number(document.getElementById("total_sqft").value),
-    bhk: Number(document.getElementById("size").value),      // changed to bhk
-    bath: Number(document.getElementById("bathrooms").value)
+    location: document.getElementById("location").value.trim(),
+    area_type: document.getElementById("area_type").value.trim(),
+    total_sqft: parseFloat(document.getElementById("total_sqft").value),
+    bhk: parseInt(document.getElementById("size").value),
+    bath: parseInt(document.getElementById("bathrooms").value)
   };
 
-  if (!data.location || !data.area_type || !data.total_sqft || !data.bhk || !data.bath) {
-    resultDiv.textContent = "Please fill all fields!";
+  // Validate inputs
+  if (!data.location || !data.area_type || isNaN(data.total_sqft) || isNaN(data.bhk) || isNaN(data.bath)) {
+    resultDiv.textContent = "Please fill all fields correctly!";
     return;
   }
 
   try {
-    const response = await fetch("/getprediction", {    // changed endpoint
+    // Send POST request to FastAPI endpoint
+    const response = await fetch("/getprediction", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data)
     });
 
+    if (!response.ok) {
+      throw new Error(`Server error: ${response.status}`);
+    }
+
     const prediction = await response.json();
-    resultDiv.textContent = `Estimated Price: ₹${prediction.prediction}`; // use correct key
+    resultDiv.textContent = `Estimated Price: ₹${prediction.prediction.toLocaleString()}`;
   } catch (err) {
     resultDiv.textContent = "Error: Could not get prediction.";
-    console.error(err);
+    console.error("Prediction error:", err);
   }
 });
-
 </script>
+
 
 <!-- Footer -->
 <footer class="text-center py-6 bg-white border-t border-gray-200 text-gray-500 text-sm">
